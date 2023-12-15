@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif; color:#ccc;
+            background-color:#1f1d1d;
+;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            background: #1f1d1d;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(182, 22, 22, 0.925);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0073e6;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .cadastro {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container cadastro" id="cadastro">
+        <h2>Cadastro</h2>
+        <form action="cadastro.php" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" name="telefone" id="telefone" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha" required>
+
+            <a href="#" id="voltarLogin">Voltar para o Login</a>
+
+            <input type="submit" value="Cadastrar">
+            <div class="success-message" id="cadastroSuccessMessage"></div>
+        </form>
+    </div>
+
+    <div class="container" id="login">
+        <h2>Login</h2>
+        <form action="cadastro.php" method="POST">
+            <label for="username">Usuário:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" name="password" id="password" required>
+
+            <input type="checkbox" id="showPassword"> Mostrar senha
+            <br>
+            <a href="#" id="mostrarCadastro">Novo Cadastro</a>
+
+            <input type="submit" value="Entrar">
+            <div class="success-message" id="loginSuccessMessage"></div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var showPasswordCheckbox = document.getElementById("showPassword");
+            var passwordInput = document.getElementById("password");
+            var loginContainer = document.getElementById("login");
+            var cadastroContainer = document.getElementById("cadastro");
+            var mostrarCadastroLink = document.getElementById("mostrarCadastro");
+            var voltarLoginLink = document.getElementById("voltarLogin");
+            var loginSuccessMessage = document.getElementById("loginSuccessMessage");
+            var cadastroSuccessMessage = document.getElementById("cadastroSuccessMessage");
+
+            mostrarCadastroLink.addEventListener("click", function(e) {
+                e.preventDefault();
+                loginContainer.style.display = "none";
+                cadastroContainer.style.display = "block";
+                loginSuccessMessage.innerText = " ";
+                cadastroSuccessMessage.innerText = " ";
+            });
+
+            voltarLoginLink.addEventListener("click", function(e) {
+                e.preventDefault();
+                loginContainer.style.display = "block";
+                cadastroContainer.style.display = "none";
+                loginSuccessMessage.innerText = "Login bem-sucedido!";
+                cadastroSuccessMessage.innerText = "Cadastro bem-sucedido!";
+            });
+
+            showPasswordCheckbox.addEventListener("change", function() {
+                if (showPasswordCheckbox.checked) {
+                    passwordInput.type = "text";
+                } else {
+                    passwordInput.type = "password";
+                }
+            });
+
+            // Adicione código aqui para exibir mensagens de sucesso após login ou cadastro bem-sucedidos
+            // Por exemplo:
+            // loginSuccessMessage.innerText = "Login bem-sucedido!";
+            // cadastroSuccessMessage.innerText = "Cadastro bem-sucedido!";
+        });
+    </script>
+</body>
+</html>
